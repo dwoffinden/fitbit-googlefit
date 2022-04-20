@@ -4,19 +4,11 @@ __author__ = "Praveen Kumar Pendyala"
 __email__ = "mail@pkp.io"
 """
 import time
-import argparse
-import logging
 import dateutil.tz
 import dateutil.parser
-import configparser
-import json
-from datetime import timedelta, date, datetime
+from datetime import timedelta, datetime
 
-import fitbit
 from fitbit.exceptions import HTTPTooManyRequests
-from apiclient.discovery import build
-from oauth2client.file import Storage
-from oauth2client.client import OAuth2Credentials
 from googleapiclient.errors import HttpError
 
 from random import randint
@@ -49,7 +41,7 @@ class Remote:
         """Update user's timezone info"""
         self.tzinfo = tzinfo
 
-    ########################### Remote data read/write methods ############################
+    # ########################## Remote data read/write methods ############################
 
     def ReadFromFitbit(self, api_call, *args, **kwargs):
         """Peforms a read request from Fitbit API. The request will be paused if API rate limiting has
@@ -96,7 +88,7 @@ class Remote:
                         dataSourceId=dataSourceId, maxEndTimeNs=maxLogNs, minStartTimeNs=minLogNs, point=data_points
                     ),
                 ).execute()
-            except BrokenPipeError as e:
+            except BrokenPipeError:
                 # Re-create the googleClient since the last one is broken
                 self.googleClient = self.helper.GetGoogleClient()
                 self.WriteToGoogleFit(dataSourceId, data_points)
@@ -114,7 +106,7 @@ class Remote:
             self.googleClient.users().sessions().update(
                 userId="me", sessionId=session_data["id"], body=session_data
             ).execute()
-        except BrokenPipeError as e:
+        except BrokenPipeError:
             # Re-create the googleClient since the last one is broken
             self.googleClient = self.helper.GetGoogleClient()
             self.WriteSessionToGoogleFit(session_data)
@@ -125,14 +117,14 @@ class Remote:
                 userId="me", dataSourceId=self.convertor.GetDataSourceId(dataType)
             ).execute()
         except HttpError as error:
-            if not "DataSourceId not found" in str(error):
+            if "DataSourceId not found" not in str(error):
                 raise error
             # Data source doesn't already exist so, create it!
             self.googleClient.users().dataSources().create(
                 userId="me", body=self.convertor.GetDataSource(dataType)
             ).execute()
 
-    ########################################### Sync methods ########################################
+    # ########################################## Sync methods #######################################
 
     def SyncFitbitToGoogleFit(self, dataType, date_stamp):
         """
@@ -175,10 +167,11 @@ class Remote:
         )
         try:
             intraday_data = interday_raw[resp_id]["dataset"]
-        except KeyError as e:
+        except KeyError:
             print("")
             print(
-                'Uh oh! Looks like you didn\'t set your "OAuth 2.0 Application Type" to "Personal" during Fitbit setup.'
+                'Uh oh! Looks like you didn\'t set your "OAuth 2.0 Application Type"'
+                ' to "Personal" during Fitbit setup.'
             )
             print("For more information, refer https://github.com/praveendath92/fitbit-googlefit/issues/2")
             print("")
