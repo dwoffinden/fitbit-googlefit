@@ -1,15 +1,13 @@
 #!/usr/bin/env python3
 """
-Main class / entry point for the application 
+Main class / entry point for the application
 
 __author__ = "Praveen Kumar Pendyala"
 __email__ = "mail@pkp.io"
 """
 import argparse
-import logging
 import dateutil.parser
 import configparser
-import json
 from datetime import time
 
 from helpers import Helper
