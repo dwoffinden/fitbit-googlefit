@@ -19,18 +19,15 @@ Copyright 2012-2015 ORCAS
    limitations under the License.
 """
 
-import os
 import sys
 import threading
 import traceback
 import webbrowser
 import json
 
-from base64 import b64encode
 import cherrypy
 from fitbit.api import FitbitOauth2Client
 from oauthlib.oauth2.rfc6749.errors import MismatchingStateError, MissingTokenError
-from requests_oauthlib import OAuth2Session
 import argparse
 import urllib.parse as urlparse
 
@@ -81,7 +78,7 @@ class OAuth2Server:
         """
         error = None
         if code:
-            self.authenticate_code(code=code)
+            error = self.authenticate_code(code=code)
         else:
             error = self._fmt_failure("Unknown error while authenticating")
         # Use a thread to shutdown cherrypy so we can return HTML first
@@ -95,11 +92,11 @@ class OAuth2Server:
         try:
             self.oauth.fetch_access_token(code, self.redirect_uri)
         except MissingTokenError:
-            error = self._fmt_failure(
+            return self._fmt_failure(
                 "Missing access token parameter.</br>Please check that " "you are using the correct client_secret"
             )
         except MismatchingStateError:
-            error = self._fmt_failure("CSRF Warning! Mismatching state")
+            return self._fmt_failure("CSRF Warning! Mismatching state")
 
     def _fmt_failure(self, message):
         tb = traceback.format_tb(sys.exc_info()[2])
