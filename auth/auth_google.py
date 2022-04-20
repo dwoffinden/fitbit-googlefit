@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-import sys
 import argparse
 
 from oauth2client.file import Storage
