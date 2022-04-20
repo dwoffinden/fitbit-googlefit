@@ -3,14 +3,11 @@
 __author__ = "Praveen Kumar Pendyala"
 __email__ = "mail@pkp.io"
 """
-import logging
 import datetime
 import time
 import dateutil.parser
-import json
-from datetime import timedelta, date
+from datetime import timedelta
 from decimal import Decimal
-from oauth2client.file import Storage
 import parsedatetime as pdt
 
 
