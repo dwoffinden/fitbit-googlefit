@@ -5,7 +5,7 @@ chardet==4.0.0
 CherryPy==18.6.0
 configparser==5.2.0
 coverage==5.5
-docutils==0.16
+docutils==0.18.1
 fitbit==0.3.1
 future==0.18.2
 google-api-python-client==2.51.0
@@ -26,10 +26,10 @@ Pygments==2.12.0
 python-dateutil==2.8.1
 pytz==2022.1
 requests==2.25.1
-requests-oauthlib==1.3.0
+requests-oauthlib==1.3.1
 rsa==4.8
 six==1.16.0
-snowballstemmer==2.1.0
+snowballstemmer==2.2.0
 Sphinx==5.0.2
 sphinx-rtd-theme==0.5.1
 tox==3.23.0
