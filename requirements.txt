@@ -32,7 +32,7 @@ six==1.16.0
 snowballstemmer==2.2.0
 Sphinx==5.0.2
 sphinx-rtd-theme==1.0.0
-tox==3.23.0
+tox==3.25.0
 uritemplate==4.1.1
 urllib3==1.26.9
 virtualenv==20.14.1
