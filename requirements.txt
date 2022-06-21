@@ -4,7 +4,7 @@ certifi==2020.12.5
 chardet==4.0.0
 CherryPy==18.6.0
 configparser==5.2.0
-coverage==5.5
+coverage==6.4.1
 docutils==0.16
 fitbit==0.3.1
 future==0.18.2
