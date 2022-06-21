@@ -34,5 +34,5 @@ Sphinx==5.0.2
 sphinx-rtd-theme==0.5.1
 tox==3.23.0
 uritemplate==4.1.1
-urllib3==1.26.5
+urllib3==1.26.9
 virtualenv==20.14.1
