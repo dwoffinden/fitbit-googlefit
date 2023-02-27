@@ -34,10 +34,10 @@ from requests_oauthlib import OAuth2Session
 import argparse
 import urllib.parse as urlparse
 
+
 class OAuth2Server:
-    def __init__(self, client_id, client_secret,
-                 redirect_uri='http://localhost:8080/'):
-        """ Initialize the FitbitOauth2Client """
+    def __init__(self, client_id, client_secret, redirect_uri="http://localhost:8080/"):
+        """Initialize the FitbitOauth2Client"""
         self.redirect_uri = redirect_uri
         self.success_html = """
             <h1>You are now authorized to access the Fitbit API!</h1>
@@ -62,16 +62,16 @@ class OAuth2Server:
         """
         url, _ = self.oauth.authorize_token_url(redirect_uri=self.redirect_uri)
         # Ask the user to open this url on a system with browser
-        print('\n-------------------------------------------------------------------------')
-        print('\t\tOpen the below URL in your browser\n')
+        print("\n-------------------------------------------------------------------------")
+        print("\t\tOpen the below URL in your browser\n")
         print(url)
-        print('\n-------------------------------------------------------------------------\n')
-        print('NOTE: After authenticating on Fitbit website, you will redirected to a URL which ')
-        print('throws an ERROR. This is expected! Just copy the full redirected here.\n')
-        redirected_url = input('Full redirected URL: ')
+        print("\n-------------------------------------------------------------------------\n")
+        print("NOTE: After authenticating on Fitbit website, you will redirected to a URL which ")
+        print("throws an ERROR. This is expected! Just copy the full redirected here.\n")
+        redirected_url = input("Full redirected URL: ")
         params = urlparse.parse_qs(urlparse.urlparse(redirected_url).query)
-        print(params['code'][0])
-        self.authenticate_code(code=params['code'][0])
+        print(params["code"][0])
+        self.authenticate_code(code=params["code"][0])
 
     @cherrypy.expose
     def index(self, state, code=None, error=None):
@@ -83,7 +83,7 @@ class OAuth2Server:
         if code:
             self.authenticate_code(code=code)
         else:
-            error = self._fmt_failure('Unknown error while authenticating')
+            error = self._fmt_failure("Unknown error while authenticating")
         # Use a thread to shutdown cherrypy so we can return HTML first
         self._shutdown_cherrypy()
         return error if error else self.success_html
@@ -96,19 +96,18 @@ class OAuth2Server:
             self.oauth.fetch_access_token(code, self.redirect_uri)
         except MissingTokenError:
             error = self._fmt_failure(
-                'Missing access token parameter.</br>Please check that '
-                'you are using the correct client_secret'
+                "Missing access token parameter.</br>Please check that " "you are using the correct client_secret"
             )
         except MismatchingStateError:
-            error = self._fmt_failure('CSRF Warning! Mismatching state')
+            error = self._fmt_failure("CSRF Warning! Mismatching state")
 
     def _fmt_failure(self, message):
         tb = traceback.format_tb(sys.exc_info()[2])
-        tb_html = '<pre>%s</pre>' % ('\n'.join(tb)) if tb else ''
+        tb_html = "<pre>%s</pre>" % ("\n".join(tb)) if tb else ""
         return self.failure_html % (message, tb_html)
 
     def _shutdown_cherrypy(self):
-        """ Shutdown cherrypy in one second, if it's running """
+        """Shutdown cherrypy in one second, if it's running"""
         if cherrypy.engine.state == cherrypy.engine.states.STARTED:
             threading.Timer(1, cherrypy.engine.exit).start()
 
@@ -116,25 +115,31 @@ class OAuth2Server:
 def main():
     # Arguments parsing
     parser = argparse.ArgumentParser("Client ID and Secret are mandatory arguments")
-    parser.add_argument("-i", "--id", required=True, help="Client id", metavar='<client-id>')
-    parser.add_argument("-s", "--secret", required=True, help="Client secret", 
-        metavar='<client-secret>')
-    parser.add_argument("-c", "--console", default=False, 
-        help="Authenticate only using console (for headless systems)", action="store_true")
+    parser.add_argument("-i", "--id", required=True, help="Client id", metavar="<client-id>")
+    parser.add_argument("-s", "--secret", required=True, help="Client secret", metavar="<client-secret>")
+    parser.add_argument(
+        "-c",
+        "--console",
+        default=False,
+        help="Authenticate only using console (for headless systems)",
+        action="store_true",
+    )
     args = parser.parse_args()
 
     server = OAuth2Server(args.id, args.secret)
     if args.console:
         server.headless_authorize()
-    else:   
+    else:
         server.browser_authorize()
 
     credentials = dict(
         client_id=args.id,
         client_secret=args.secret,
-        access_token=server.oauth.session.token['access_token'],
-        refresh_token=server.oauth.session.token['refresh_token'])
-    json.dump(credentials, open('fitbit.json', 'w'))
+        access_token=server.oauth.session.token["access_token"],
+        refresh_token=server.oauth.session.token["refresh_token"],
+    )
+    json.dump(credentials, open("fitbit.json", "w"))
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
