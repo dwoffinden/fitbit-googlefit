@@ -1,12 +1,12 @@
 repos:
   - repo: https://github.com/psf/black
-    rev: 22.12.0
+    rev: 23.3.0
     hooks:
       - id: black
         language_version: python3
         args:
           - -l119
-          - -tpy310
+          - -tpy311
   - repo: https://github.com/pycqa/flake8
     rev: 6.0.0
     hooks:
