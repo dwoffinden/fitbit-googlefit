@@ -154,11 +154,14 @@ class Convertor:
         timestamp = "{} {}".format(date, data_point["time"])
         epoch_time_nanos = self.nano(self.EpochOfFitbitTimestamp(timestamp))
 
+        # Fit rejects ranges that exceed 2000kcal/hr or 33⅓/min
+        val = min(data_point["value"], 33.33333)
+
         return dict(
             dataTypeName="com.google.calories.expended",
             startTimeNanos=epoch_time_nanos,
             endTimeNanos=epoch_time_nanos + self.NANOS_PER_MINUTE,
-            value=[dict(fpVal=data_point["value"])],
+            value=[dict(fpVal=val)],
         )
 
     def ConvertFibitWeightPoint(self, date, data_point):
