@@ -4,7 +4,7 @@ charset-normalizer==3.3.2
 configparser==7.0.0
 fitbit==0.3.1
 google-api-core==2.19.0
-google-api-python-client==2.130.0
+google-api-python-client==2.132.0
 google-auth==2.29.0
 google-auth-httplib2==0.2.0
 googleapis-common-protos==1.63.0
