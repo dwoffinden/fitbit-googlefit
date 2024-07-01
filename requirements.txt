@@ -3,7 +3,7 @@ certifi==2024.6.2
 charset-normalizer==3.3.2
 configparser==7.0.0
 fitbit==0.3.1
-google-api-core==2.19.0
+google-api-core==2.19.1
 google-api-python-client==2.134.0
 google-auth==2.30.0
 google-auth-httplib2==0.2.0
