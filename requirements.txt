@@ -3,8 +3,8 @@ certifi==2024.8.30
 charset-normalizer==3.4.0
 configparser==7.1.0
 fitbit==0.3.1
-google-api-core==2.20.0
-google-api-python-client==2.147.0
+google-api-core==2.21.0
+google-api-python-client==2.149.0
 google-auth==2.35.0
 google-auth-httplib2==0.2.0
 googleapis-common-protos==1.65.0
@@ -16,7 +16,7 @@ parsedatetime==2.6
 protobuf==5.28.2
 pyasn1==0.6.1
 pyasn1-modules==0.4.1
-pyparsing==3.1.4
+pyparsing==3.2.0
 python-dateutil==2.9.0.post0
 requests==2.32.3
 requests-oauthlib==2.0.0
