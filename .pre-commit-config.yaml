@@ -1,10 +1,10 @@
 repos:
   - repo: https://github.com/psf/black
-    rev: 6fdf8a4af28071ed1d079c01122b34c5d587207a # 24.2.0
+    rev: 1b2427a2b785cc4aac97c19bb4b9a0de063f9547 # 24.10.0
     hooks:
       - id: black
         language_version: python3
   - repo: https://github.com/pycqa/flake8
-    rev: 88a4f9b2f48fc44b025a48fa6a8ac7cc89ef70e0 # 7.0.0
+    rev: cf1542cefa3e766670b2066dd75c4571d682a649 # 7.1.1
     hooks:
       - id: flake8
