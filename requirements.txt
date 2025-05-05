@@ -1,6 +1,6 @@
 cachetools==5.5.2
 certifi==2025.4.26
-charset-normalizer==3.4.1
+charset-normalizer==3.4.2
 configparser==7.2.0
 fitbit==0.3.1
 google-api-core==2.24.2
