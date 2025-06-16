@@ -1,5 +1,5 @@
 cachetools==5.5.2
-certifi==2025.4.26
+certifi==2025.6.15
 charset-normalizer==3.4.2
 cherrypy==18.10.0
 configparser==7.2.0
