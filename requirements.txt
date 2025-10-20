@@ -1,6 +1,6 @@
 cachetools==6.2.1
 certifi==2025.10.5
-charset-normalizer==3.4.3
+charset-normalizer==3.4.4
 cherrypy==18.10.0
 configparser==7.2.0
 fitbit==0.3.1
