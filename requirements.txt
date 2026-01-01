@@ -1,4 +1,4 @@
-cachetools==6.2.1
+cachetools==6.2.4
 certifi==2025.11.12
 charset-normalizer==3.4.4
 cherrypy==18.10.0
