@@ -1,11 +1,11 @@
 cachetools==7.0.1
 certifi==2026.2.25
-charset-normalizer==3.4.4
+charset-normalizer==3.4.6
 cherrypy==18.10.0
 configparser==7.2.0
 fitbit==0.3.1
 google-api-core==2.30.0
-google-api-python-client==2.190.0
+google-api-python-client==2.193.0
 google-auth==2.48.0
 google-auth-httplib2==0.3.0
 googleapis-common-protos==1.72.0
@@ -19,7 +19,7 @@ pyasn1==0.6.3
 pyasn1-modules==0.4.2
 pyparsing==3.3.2
 python-dateutil==2.9.0.post0
-requests==2.32.5
+requests==2.33.1
 requests-oauthlib==2.0.0
 rsa==4.9.1
 six==1.17.0
